@@ -1,0 +1,30 @@
+{
+  "name": "fproxy",
+  "version": "1.0.0",
+  "description": "Generic Functional Proxy",
+  "main": "fproxy.js",
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "author": "Rui Azevedo",
+  "license": "MIT",
+  "keywords": [
+    "JavaScript",
+    "Functional",
+    "Proxy",
+    "Lazy"
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "repository" :
+    { "type" : "git"
+    , "url" : "https://github.com/neu-rah/node-fproxy"
+    },
+  "engines" : { "node" : ">=4.2.2" },
+  "dependencies" : {},
+  "devDependencies": {
+    "mocha": "*",
+    "should": ">=0.0.1"
+  }
+}
