@@ -22,7 +22,7 @@ describe('fproxy', function() {
           tag:function(url) {return path.resolve(process.cwd(), url);},
           load:function(url) {return fs.readFileSync(url).toString();},
           post:function(tag,item) {
-            if (item.watche) item.watcher.close();
+            if (item.watcher) item.watcher.close();
             item.watcher=fs.watch(tag, function(event, filename){item.refresh();});
           }
         });

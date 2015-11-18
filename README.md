@@ -40,3 +40,8 @@ signature:
 **.close**: remove item from proxy cache
 
 **.refresh**: update internal version counter resulting in reload on next request
+
+#inocuous#
+
+- result document is not polluted with any property of the module.
+- client receives no information/access about neighbor objects.
