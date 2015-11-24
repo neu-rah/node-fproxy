@@ -66,11 +66,11 @@ signature:
 
 >function(proxyItem) {}
 
-**delayed**: returns true for if media defaults to assync.
+**delayed**: returns true if media defaults to assync (as es6 promises fs), cached results will promptly resolve the promise.
 
 signature:
 
->function() {return false}
+>function() {return bool}
 
 
 #The returned function has a **proxy** member with functions:#

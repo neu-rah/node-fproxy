@@ -1,6 +1,6 @@
 {
   "name": "fproxy",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Generic Functional Proxy",
   "main": "fproxy.js",
   "scripts": {
@@ -29,6 +29,5 @@
   "devDependencies": {
     "mocha": "*",
     "should": ">=0.0.1"
-  },
-  "tonicExampleFilename": "example.js"
+  }
 }
