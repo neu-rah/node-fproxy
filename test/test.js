@@ -16,23 +16,16 @@ describe('fproxy', function() {
 		});
 	});
 
-  describe('file factory', function() {
-    it('should return a text loader function', function() {
-      textFile=fProxy({
-          tag:function(url) {return path.resolve(process.cwd(), url);},
-          load:function(url) {return fs.readFileSync(url).toString();},
-          post:function(tag,item) {
-            if (item.watcher) item.watcher.close();
-            item.watcher=fs.watch(tag, function(event, filename){item.refresh();});
-          }
-        });
-      textFile.should.be.type('function');
-    });
-  });
+  describe('media handler and data format setup', function() {
+    it('should return a media handler function', function() {
+			textFile=fProxy(fProxy.mediaDescriptors.fs,o=>o.toString());
+			textFile.should.be.type('function');
+		});
+	});
 
   describe('file reader', function() {
     it('should return functional file reader', function() {
-			myFile=textFile("test/resources/text.txt");
+			myFile=textFile("test/resources/test.txt");
       myFile.should.be.type('function');
 		});
 	});

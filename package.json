@@ -1,6 +1,6 @@
 {
   "name": "fproxy",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Generic Functional Proxy",
   "main": "fproxy.js",
   "scripts": {
@@ -9,10 +9,13 @@
   "author": "Rui Azevedo",
   "license": "MIT",
   "keywords": [
-    "JavaScript",
     "Functional",
     "Proxy",
-    "Lazy"
+    "Lazy",
+    "Documents",
+    "Load",
+    "File system",
+    "Watch"
   ],
   "directories": {
     "test": "test"
