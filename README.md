@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/fproxy.svg)](https://badge.fury.io/js/fproxy)
+
 # fproxy #
 ==========
 
