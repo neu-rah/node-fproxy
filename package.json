@@ -1,6 +1,6 @@
 {
   "name": "fproxy",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Generic Functional Proxy",
   "main": "fproxy.js",
   "scripts": {
