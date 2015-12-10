@@ -16,9 +16,32 @@ describe('fproxy', function() {
 		});
 	});
 
-  describe('media handler and data format setup', function() {
-    it('should return a media handler function', function() {
-			textFile=fProxy(fProxy.mediaDescriptors.fs,o=>o.toString());
+  describe('memory media (default)', function() {
+    it('should stor/retrive a value', function() {
+      (fProxy()("some value")).should.match(/some value/);
+    });
+  });
+
+  describe('params media', function() {
+    it('should stor/retrive function arguments', function() {
+      var test=fProxy(fProxy.mediaDescriptors.args)(1,2,3)();
+      test.should.be.type('object');
+    });
+  });
+
+  describe('object media', function() {
+    it('should create+stor/retrive new objects', function() {
+      function Obj() {this.storedParams=arguments;}
+      var test=fProxy(fProxy.mediaDescriptors.obj,Obj)("Ok")();
+      test.should.be.type('object');
+      test.storedParams.should.be.type('object');
+      test.storedParams[0].should.match(/Ok/);
+    });
+  });
+
+  describe('file media', function() {
+    it('should return a file media handler function', function() {
+			textFile=fProxy(fProxy.mediaDescriptors.file,o=>o.toString());
 			textFile.should.be.type('function');
 		});
 	});

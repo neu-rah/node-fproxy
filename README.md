@@ -8,86 +8,47 @@ Functional generic proxy stores a set of tags and information and return a funct
 ### examples
 
 ```javascript
-//using ES6 Promise returning text file reader
+//using local file system text file reader with watcher sync/assync modes
 var fProxy=require("fproxy");
 var textFile=fProxy(fProxy.mediaDescriptors.file,o=>o.toString());
-var text=textFile("test/resources/test.txt");
-text().then(o=>console.log("Text:",o));//get updated & parsed document
-//do some external changes to the text file
-text().then(o=>console.log("Updated:",o));//get updated & parsed document
-```
-
-```javascript
-//using local file system text file reader
-var fProxy=require("fproxy");
-var textFile=fProxy(fProxy.mediaDescriptors.fs,o=>o.toString());
 var text=textFile("test/resources/test.txt");
 text(o=>console.log("Text:",o));//get updated & parsed document
 //do some external changes to the text file
 text(o=>console.log("Text:",o));//get updated & parsed document
 console.log(text());//get file content in sync mode (no callback provided)
+text((e,o)=>console.log(e||o));//assync mode
 ```
 
-The abstraction allow implementation of file watchers [see lazy-doc](https://github.com/neu-rah/lazy-docs).
+```javascript
+//es6 promises using node-swear
+var swear=require("node-swear");
+var fProxy=require("fproxy");
+var textFile=fProxy(fProxy.mediaDescriptors.file,o=>o.toString());
+var text=swear(textFile("test/resources/test.txt"));
+text().then(o=>log(o)).catch(e=>log(e));
+```
 
-fproxy must be initialized with a media descriptor. The media descriptor has the option to be sync or assync.
+fproxy must be initialized with a media descriptor. The media descriptor has the option to be sync or assync, the resulting access function can be then turned into a promise with node-swear.
 
 A set o media descriptors is available at:
 >require("fproxy").mediaDescriptors
 
 media descriptors are ES6 classes
 
-mem:  mediaItem, memory storage
-fs:   mediaFS, sync/assync file system
-file: mediaPFS, ES6 promise return file system
+mem:  Mem, memory storage of single values
+args: Params, storing passed params
+obj:  Obj, creates new objects where parser is then a constructor
+file: File, sync/assync file system (use *node-swear* for ES6 promises)
 
 #media descriptor#
 
-media descriptor is a class with:
+a media descriptor is a class with:
 
-**constructor**
+**constructor**: define parser
 
-**tag**: functions to transform the tag before it being used in proxy (on fs this is tipical relative to absolute path)
-
-signature:
-
->function(tagString) {return tagString;}
-
-**load**: function to transform the data (load the document by parsing string data)
-
-signature:
-
->function(stringData) {return parse(stringData);}
-
-**post**: function to fine-tune the proxy object (on fs its the place to add/remove watchers),
-this function is called after the load and every time the document refreshes.
-
-signature:
-
->function(proxyItem) {}
-
-**delayed**: returns true if media defaults to assync (as es6 promises fs), cached results will promptly resolve the promise.
-
-signature:
-
->function() {return bool}
-
-
-#The returned function has a **proxy** member with functions:#
-
-**.close**: remove item from proxy cache
-
->.close()
-
-**.refresh**: update internal version counter resulting in reload on next request
-
->.refresh()
-
-**.store**: set cache data and update version counter
-
->.store(data)
+**load**: sync/assync read and parse the data with specific implementation parameters
 
 #inocuous#
 
 - result document is not polluted with any property of this module.
-- client receives no information/access about neighbor objects.
+- client receives no information/access about other proxy items.
