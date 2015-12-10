@@ -10,11 +10,12 @@ class Mem {
   constructor(parser) {this.parser=parser;}
   refresh() {this.data=null;}
   close() {this.refresh();}
-  load(o) {return o;}
+  load(o) {return this.parser(o);}
+  static tag(o) {return o;}
 }
 
 //function arguments or json
-class Params extends Mem {load() {return arguments;}}
+class Params extends Mem {load() {return this.parser(arguments);}}
 
 //Objects
 class Obj extends Mem {
@@ -26,6 +27,7 @@ class Obj extends Mem {
 }
 
 class Files extends Mem {
+  static tag(url) {return path.resolve(process.cwd(),url);}
   ready(callback,err,data) {
     if (err) callback(err);
     else callback(err,this.parser(data));
