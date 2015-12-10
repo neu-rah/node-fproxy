@@ -3,7 +3,7 @@
 
 **generic javascript functional lazy proxy abstraction**
 
-Functional generic proxy stores a set of tags and information and return a function to retrieve them.
+Functional generic lazy proxy, provides functions to access stored values, arguments, objects, files or documents.
 
 ### examples
 
